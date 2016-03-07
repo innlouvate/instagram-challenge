@@ -1,0 +1,6 @@
+<h2>Leave a comment</h2>
+<%= form_for [@photo, @comment] do |f| %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.submit 'Comment' %>
+<% end %>

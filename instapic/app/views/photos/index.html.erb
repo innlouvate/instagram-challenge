@@ -1,0 +1,43 @@
+<a href=<%= new_photo_path %>>Add a photo</a>
+
+<section class="photo_stream">
+
+  <% if @photos.any? %>
+    <ul>
+      <% @photos.each do |photo| %>
+        <li>
+          <h2><%= link_to photo.name, photo_path(photo) %>
+            <%= photo.user.email %></h2>
+
+          <%= image_tag photo.image.url(:medium) %>
+
+          <p><%= link_to "Edit #{photo.name}", edit_photo_path(photo)%></p>
+          <%= link_to "Delete #{photo.name}", photo_path(photo), method: :delete%></p>
+          <%= link_to "Comment", new_photo_comment_path(photo)%></p>
+          <p><%= link_to "Thumbs up", photo_thumbs_path(photo), class: 'thumbs-link' %>
+          <span class='thumbs_count'><%= photo.thumbs.count %></span> thumbs up
+
+          <h3>Comments:</h3>
+          <% if photo.comments.any? %>
+            <ul>
+              <% photo.comments.each do |comment| %>
+                <li>
+                  <%= comment.user.email %>
+                  <%= comment.description %>
+                </li>
+              <% end %>
+            </ul>
+
+          <% else %>
+            No comments
+          <% end %>
+
+        </li>
+      <% end %>
+    </ul>
+
+  <% else %>
+    <h1>No photos yet</h1>
+  <% end %>
+
+</section>
